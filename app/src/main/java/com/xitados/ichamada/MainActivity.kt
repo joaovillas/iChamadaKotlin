@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
-                tvResult.append(data.get(i).fk_turmas.toString() +"   "+data.get(i).qtd_faltas.toString()+"    "+data.get(i).nome.toString()+"\n")
+                tvResult.append(data.get(i).nome.toString() +"   "+data.get(i).fk_turmas.toString()+"    "+data.get(i).qtd_faltas.toString()+"\n")
             }
 
         })

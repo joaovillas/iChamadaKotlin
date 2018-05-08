@@ -40,7 +40,7 @@ import android.widget.Toast
                         "                    (3,'Banco de Dados', '7:15' , 2), (4,'Inteligencia Artificial' ,'10:05' ,2) , (5,'Interface Homem Computador' ,'7:15',2);" )
 
 
-                 db?.execSQL("insert into Alunos (nome , qtd_faltas , fk_turma ) values ('Leonardo', 0, 2), ('Joao', 0, 2), ('Cesar', 0, 2), ('Victor', 10, 2), ('Benilton1', 15, 2), ('Julia', 1, 1), ('Maria', 7, 1), ('Pedro', 20, 3), ('Cralos', 10, 3), ('Paulo', 0, 2), ('Ana', 0, 3), ('Beatriz', 0, 2), ('Jamile', 0, 2), ('Natalia', 0, 1), ('Maitê', 0, 2), ('Claudia', 8, 2), ('Marcos', 0, 1), ('Cleide', 0, 1), ('Sandra', 5, 1), ('Paulo', 0, 1), ('Nanda', 6, 1), ('Thiago', 23, 1),  ('Marcos', 12, 1),  ('Paulo', 0, 3),  ('Crala', 0, 3),  ('Juan', 0, 3), ('Jonatan', 0, 3), ('Carina, 0, 3), ('Bethania', 0, ), ('Sabrina', 0, 3), ('Amélia', 0, 3), ('Minéia', 6, 3), ('Adriana', 0, 2), ('Martinália', 0, 2), ('Douglas', 0, 2), ('Tatiane', 0, 2), ('Juliana', 0, 1), ('Plínio', 0, 1);")
+                 db?.execSQL("insert into Alunos (nome , qtd_faltas , fk_turma ) values ('Leonardo', 0, 2), ('Joao', 0, 2), ('Cesar', 0, 2), ('Victor', 10, 2), ('Benilton1', 15, 2), ('Julia', 1, 1), ('Maria', 7, 1), ('Pedro', 20, 3), ('Cralos', 10, 3), ('Paulo', 0, 2), ('Ana', 0, 3), ('Beatriz', 0, 2), ('Jamile', 0, 2), ('Natalia', 0, 1), ('Maitê', 0, 2), ('Claudia', 8, 2), ('Marcos', 0, 1), ('Cleide', 0, 1), ('Sandra', 5, 1), ('Paulo', 0, 1), ('Nanda', 6, 1), ('Thiago', 23, 1),  ('Marcos', 12, 1),  ('Paulo', 0, 3),  ('Crala', 0, 3),  ('Juan', 0, 3), ('Jonatan', 0, 3), ('Carina', 0, 3), ('Bethania', 0, 3), ('Sabrina', 0, 3), ('Amélia', 0, 3), ('Minéia', 6, 3), ('Adriana', 0, 2), ('Martinália', 0, 2), ('Douglas', 0, 2), ('Tatiane', 0, 2), ('Juliana', 0, 1), ('Plínio', 0, 1);")
         }
 
         override fun onUpgrade(p0: SQLiteDatabase?, p1: Int, p2: Int) {
@@ -122,7 +122,7 @@ import android.widget.Toast
         fun insertAlunos(alunos:Alunos){
             val db = this.writableDatabase
             var cv = ContentValues()
-            cv.
+
 
 
         }
@@ -133,7 +133,7 @@ import android.widget.Toast
 
             val db = this.readableDatabase
             //val query = "Select usuario,senha from Professores"
-            val query = "Select * from Alunos"
+            val query = "Select id_aluno,nome,qtd_faltas,fk_turma from Alunos"
             val result = db.rawQuery(query,null)
             if (result.moveToFirst()){
                 do{
@@ -143,11 +143,12 @@ import android.widget.Toast
                     var alunos = Alunos()
 
                     //professor.nome = result.getString(result.getColumnIndex("usuario"))
-                    //professor.password = result.getString(result.getColumnIndex("senha"))
-                    alunos.fk_turmas = result.getInt(result.getColumnIndex("fk_turmas"))
-                    alunos.qtd_faltas = result.getInt(result.getColumnIndex("qtd_faltas"))
                     alunos.id_aluno= result.getInt(result.getColumnIndex("id_aluno"))
                     alunos.nome = result.getString(result.getColumnIndex("nome"))
+
+                    alunos.qtd_faltas = result.getInt(result.getColumnIndex("qtd_faltas"))
+                    alunos.fk_turmas = result.getInt(result.getColumnIndex("fk_turma"))
+
 
 
                     list.add(alunos)

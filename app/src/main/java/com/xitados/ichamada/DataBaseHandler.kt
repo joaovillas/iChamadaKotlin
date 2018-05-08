@@ -4,6 +4,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.util.Log
 import android.widget.Toast
 
 
@@ -35,7 +36,7 @@ import android.widget.Toast
                 "FOREIGN KEY (fk_turma) References Turmas (id_turma)" +
                 ");" )
 
-                db?.execSQL("insert into Professores (usuario,senha) values ('admin','admin') , ('othon ' , '1234') ; insert into Turmas (id_turma , disciplina , horario , prof_key) values " +
+                db?.execSQL("insert into Professores (usuario,senha) values  ('Helano','portugol'), ('admin','admin') ,('Othon','123456'); insert into Turmas (id_turma , disciplina , horario , prof_key) values " +
                         "                    (1,'Orientação a Objetos' , '7:15', 2) , (2,'Programação para dispositivos moveis','10:05', 2 ) " +
                         "                    (3,'Banco de Dados', '7:15' , 2), (4,'Inteligencia Artificial' ,'10:05' ,2) , (5,'Interface Homem Computador' ,'7:15',2);" )
 
@@ -162,6 +163,43 @@ import android.widget.Toast
 
 
             return list
+        }
+
+
+        fun Autentica (senha:String , usuario:String):Boolean{
+
+            Log.d("senha fora do if",senha)
+            Log.d("Usuario: fora do if",usuario)
+            print(senha)
+            print(usuario)
+
+
+            val db = this.readableDatabase
+            //val query = "Select usuario,senha from Professores"
+            val query = "Select usuario,senha from Professores where usuario = '"+usuario.replace(" ","")+"' and senha ='"+senha.replace(" ","")+"';  "
+            val result = db.rawQuery(query,null)
+            var accept:Boolean =false
+            if (result.moveToFirst()) {
+                do {
+
+                    if(result.getString(0).replace(" ","") == usuario.replace(" ","") && result.getString(1).replace(" ","") == senha.replace(" ","") ){
+                        Log.d("CAIU NO IF ", " =============================================================================")
+                        Log.d("usuario",result.getString(0))
+                        Log.d("senha",result.getString(1))
+                        accept=true
+                        break
+                    }else{
+                        Log.d("usuario",result.getString(0))
+                        Log.d("senha",result.getString(1))
+                        accept= false
+                        break
+                    }
+
+
+
+                } while (result.moveToFirst())
+            }
+            return accept
         }
 
 

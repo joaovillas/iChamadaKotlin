@@ -19,12 +19,13 @@ class MainActivity : AppCompatActivity() {
         btn_login.setOnClickListener({
             if(etvName.text.toString().length >0 &&etvSenha.text.toString().length >0  ){
 
-                var professor = Professor(etvName.text.toString(),etvSenha.text.toString() )
-                //var turmas = Turmas()
-                professor.nome = etvName.text.toString()
-                professor.password = etvSenha.text.toString()
+                var accept:Boolean = db.Autentica(etvName.text.toString(), etvSenha.text.toString())
 
-                db.insertData   (professor)
+                if (accept == true){
+                    Toast.makeText(context,"Login feito com Sucesso",Toast.LENGTH_SHORT).show()
+                }else{
+                    Toast.makeText(context,"Usuario ou senha incorreto",Toast.LENGTH_SHORT).show()
+                }
 
             }else{
                 Toast.makeText(context,"Preencha todos os campos",Toast.LENGTH_SHORT).show()

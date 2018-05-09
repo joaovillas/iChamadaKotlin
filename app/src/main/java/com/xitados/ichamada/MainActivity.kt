@@ -1,7 +1,9 @@
 package com.xitados.ichamada
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -23,6 +25,12 @@ class MainActivity : AppCompatActivity() {
 
                 if (accept == true){
                     Toast.makeText(context,"Login feito com Sucesso",Toast.LENGTH_SHORT).show()
+                    val id_prof = db.enviaProf(etvName.text.toString(),etvSenha.text.toString() )
+
+                    val randomIntent = Intent(this, Logado::class.java)
+                    startActivity(randomIntent)
+
+
                 }else{
                     Toast.makeText(context,"Usuario ou senha incorreto",Toast.LENGTH_SHORT).show()
                 }
@@ -33,22 +41,6 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        btn_read.setOnClickListener({
-            var data = db.readDataAlunos()
-            print(data)
-            tvResult.text ="Lista de Alunos\n"
-
-            for (i in 0..data.size-1){
-
-                //println(data.get(i).id_turma.toString())
-                //println(data.get(i).disciplina.toString())
-
-
-
-                tvResult.append(data.get(i).nome.toString() +"   "+data.get(i).fk_turmas.toString()+"    "+data.get(i).qtd_faltas.toString()+"\n")
-            }
-
-        })
 
 
 

@@ -9,7 +9,7 @@ class Professor{
 
 
 
-
+    var id_prof:Int = 1
     var password:String = ""
     var nome: String = ""
 

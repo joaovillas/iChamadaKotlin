@@ -1,39 +1,58 @@
-import android.view.ViewGroup
-import android.app.Activity
 import android.content.Context
+import android.R.*
+import android.app.Activity
+import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.BaseAdapter
-import android.widget.ImageView
 import com.xitados.ichamada.Alunos
-import kotlinx.android.synthetic.main.activity_turmas.view.*
-import java.util.zip.Inflater
+import com.xitados.ichamada.R
+import kotlinx.android.synthetic.main.linha_aluno.view.*
 
-private class RecipeAdapter (plistadealunos:MutableList<Alunos>, context:Context): BaseAdapter(){
 
-    private val mContext: Context
+class qualquer_coisa : AppCompatActivity() {
 
-    init{
-        this.mContext = context
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_turmas)
     }
 
-    override fun getView(p0: Int, p1: View?, p2: ViewGroup?): View {
-        val layoutInflater = LayoutInflater.from(mContext)
-        
-    }
+    class RecipeAdapter(private val context: Context,
+                        private val dataSource: ArrayList<Alunos>) : BaseAdapter() {
 
-    override fun getItem(p0: Int): Any {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
 
-    override fun getItemId(p0: Int): Long {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+        private val mContext: Context
 
-    override fun getCount(): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+        init {
+            this.mContext = context
+        }
 
-}
+        private val layoutinflater = LayoutInflater.from(mContext)
+        override fun getCount(): Int {
+            return dataSource.size
+        }
+
+        //2
+        override fun getItem(position: Int): Any {
+            return dataSource[position]
+        }
+
+        //3
+        override fun getItemId(position: Int): Long {
+            return position.toLong()
+        }
+
+        //4
+        override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+            // Get view for row item
+            val rowView = layoutinflater.inflate(R.layout.linha_aluno, parent, false)
+
+            return rowView
+        }
+
+
+    }
 
 }
